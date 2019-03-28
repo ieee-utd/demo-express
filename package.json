@@ -4,7 +4,7 @@
   "description": "Demo for using Express",
   "main": "app.js",
   "scripts": {
-    "start": "./node_modules/gulp/bin/gulp.js watch",
+    "start": "./node_modules/gulp/bin/gulp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "async-once": "^1.0.1",
     "del": "^4.0.0",
     "gulp": "^4.0.0",
     "gulp-nodemon": "^2.4.2",

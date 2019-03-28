@@ -8,19 +8,19 @@ gulp.task('clean', function() {
   return del(['dist/'])
 })
 
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', gulp.series('clean', function () {
+  return tsProject.src()
+      .pipe(tsProject())
+      .js.pipe(gulp.dest("dist"))
+}))
+
+gulp.task('build', gulp.series('clean', function() {
   return tsProject.src()
   .pipe(tsProject()).js
-  .pipe(gulp.dest('dist/'));
-});
+  .pipe(gulp.dest('dist/'))
+}))
 
-gulp.task('build', ['clean'], function() {
-  return tsProject.src()
-  .pipe(tsProject()).js
-  .pipe(gulp.dest('dist/'));
-})
-
-gulp.task('watch', ['compile'], function () {
+gulp.task('watch', gulp.series('compile', function () {
   nodemon({
     script: 'dist/app.js',
     ext: 'ts',
@@ -29,7 +29,9 @@ gulp.task('watch', ['compile'], function () {
       ts: "node --trace-warnings"
     },
     debug: true
-  });
-});
+  })
+}))
 
-gulp.task('default', ['watch']);
+// gulp.task('default', ['watch']);
+
+gulp.task('default', gulp.parallel('watch'))
