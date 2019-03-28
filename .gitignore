@@ -1,3 +1,4 @@
-.vscode/*
-dist/*
+.vscode/
+dist/
 node_modules/
+db/
