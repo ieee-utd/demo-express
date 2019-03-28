@@ -1,0 +1,31 @@
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "Demo for using Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "./node_modules/gulp/bin/gulp.js watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ieee-utd/express-demo.git"
+  },
+  "author": "Caleb Fung",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/ieee-utd/express-demo/issues"
+  },
+  "homepage": "https://github.com/ieee-utd/express-demo#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "del": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-typescript": "^5.0.1",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
+  }
+}
