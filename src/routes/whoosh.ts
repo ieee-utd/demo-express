@@ -5,13 +5,10 @@ export let route = express.Router();
 
 // List all items
 route.get("/", async (req: any, res: any, next: any) => {
-  model.find({}, (err: any, items: any) => {
-    if (err) {
-      res.send(err);
-      return;
-    }
-    res.json(items);
-  });
+  try {
+    var items = await model.find({ })
+    res.send(items);
+  } catch (e) { next(e) }
 });
 
 // List single item
@@ -65,3 +62,5 @@ route.delete('/:id', async (req: any, res: any, next: any) => {
     res.json({ message: `Removed: ${numRemoved} item(s)` });
   });
 });
+
+// Update

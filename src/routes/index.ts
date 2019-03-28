@@ -7,4 +7,4 @@ routes.get('/', async (req: any, res: any) => {
   res.send("Welcome to our API!");
 });
 
-routes.use("/whoosh", whooshRoute);
+routes.use("/whoosh", whooshRoute); 
