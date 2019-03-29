@@ -1,12 +1,11 @@
 //force pwetty colors
 process.env.FORCE_COLOR = "1";
 
-import * as express from "express";
-import * as mongoose from "mongoose";
-import * as morgan from "morgan";
-import * as compression from "compression";
-import * as bodyParser from "body-parser";
-import { routes } from "./routes";
+import * as express from "express";         //create APIs really easily
+import * as mongoose from "mongoose";       //model the world you use
+import * as morgan from "morgan";           //log requests
+import * as compression from "compression"; //basic API compression
+import * as bodyParser from "body-parser";  //parse data coming in to the server
 
 //Handle stupid mistakes
 const unhandledRejection = require("unhandled-rejection");
@@ -32,14 +31,14 @@ mongoose.connect(DATABASE_URI, { config: { autoIndex: true }, useNewUrlParser: t
 });
 
 //Load Express middleware
-const port = 3000;
-let app = express();
-app.use(morgan('dev'));
-app.use(compression());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = 3000; //listen to localhost:PORT_NUMBER_HERE
+let app = express(); //load express
+app.use(morgan('dev')); //log every request you hit
+app.use(compression()); //enable packet compression, making requests faster
+app.use(bodyParser.json()); //allow parsing JSON
 
 //The API (real work goes here)
+import { routes } from "./routes";
 app.use('/api', routes);
 
 //Start server (finally)
