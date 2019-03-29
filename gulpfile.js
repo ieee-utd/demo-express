@@ -20,7 +20,7 @@ gulp.task('build', gulp.series('clean', function() {
   .pipe(gulp.dest('dist/'))
 }))
 
-gulp.task('watch', gulp.series(function () {
+gulp.task('watch', gulp.series('compile', function () {
   nodemon({
     script: 'dist/app.js',
     ext: 'ts',
