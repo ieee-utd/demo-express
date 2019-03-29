@@ -1,14 +1,12 @@
 //force pwetty colors
 process.env.FORCE_COLOR = "1";
 
-import express from "express";
-// import * as mongoose from "mongoose";
+import * as express from "express";
+import * as mongoose from "mongoose";
+import * as morgan from "morgan";
+import * as compression from "compression";
 import * as bodyParser from "body-parser";
 import { routes } from "./routes";
-
-const mongoose = require('mongoose')
-const morgan = require('morgan')
-const compression = require('compression')
 
 //Handle stupid mistakes
 const unhandledRejection = require("unhandled-rejection");

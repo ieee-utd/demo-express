@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import { route as whooshRoute } from "./whoosh";
 
 export const routes = express.Router();
