@@ -8,10 +8,12 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/polymer-element.js';
+import { BaseElement } from './base-element.js';
+import './elements/todo-card.js';
 import './shared-styles.js';
 
-class MyView1 extends PolymerElement {
+class MyView1 extends BaseElement {
   static get template() {
     return html`
       <style include="shared-styles">
@@ -20,15 +22,29 @@ class MyView1 extends PolymerElement {
 
           padding: 10px;
         }
+        .main {
+          width: 100%;
+          text-align: center;
+        }
       </style>
 
-      <div class="card">
-        <div class="circle">1</div>
-        <h1>View One</h1>
-        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <div class="main">
+        <h1>TODO</h1>
+        <todo-card></todo-card>
       </div>
     `;
+  }
+
+  ready() {
+    super.ready()
+
+    this._get('/whoosh')
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((e) => {
+      console.error(e)
+    })
   }
 }
 
