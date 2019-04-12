@@ -7,11 +7,10 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-
 import { html } from '@polymer/polymer/polymer-element.js';
 import { BaseElement } from './base-element.js';
-import './elements/todo-card.js';
 import './shared-styles.js';
+import './elements/todo-card.js';
 
 class MyView1 extends BaseElement {
   static get template() {
@@ -22,6 +21,9 @@ class MyView1 extends BaseElement {
 
           padding: 10px;
         }
+        h1 {
+          font-size: 36px;
+        }
         .main {
           width: 100%;
           text-align: center;
@@ -30,21 +32,36 @@ class MyView1 extends BaseElement {
 
       <div class="main">
         <h1>TODO</h1>
-        <todo-card></todo-card>
+        <div class="card-container">
+          <dom-repeat items="[[cards]]">
+            <template>
+              <todo-card info="[[item]]"></todo-card>
+            </template>
+          </dom-repeat>
+        </div>
       </div>
     `;
   }
 
   ready() {
-    super.ready()
+    super.ready();
 
-    this._get('/whoosh')
+    this._get("/whoosh")
     .then((data) => {
-      console.log(data)
+      this.cards = data
     })
     .catch((e) => {
       console.error(e)
     })
+  }
+
+  static get properties() {
+    return {
+      cards: {
+        type: Array,
+        value: []
+      }
+    }
   }
 }
 

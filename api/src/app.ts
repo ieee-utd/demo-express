@@ -6,6 +6,7 @@ import * as mongoose from "mongoose";       //model the world you use
 import * as morgan from "morgan";           //log requests
 import * as compression from "compression"; //basic API compression
 import * as bodyParser from "body-parser";  //parse data coming in to the server
+import * as cors from "cors";
 
 //Handle stupid mistakes
 const unhandledRejection = require("unhandled-rejection");
@@ -32,10 +33,20 @@ mongoose.connect(DATABASE_URI, { config: { autoIndex: true }, useNewUrlParser: t
 
 //Load Express middleware
 const port = 3000; //listen to localhost:PORT_NUMBER_HERE
+
 let app = express(); //load express
 app.use(morgan('dev')); //log every request you hit
 app.use(compression()); //enable packet compression, making requests faster
 app.use(bodyParser.json()); //allow parsing JSON
+
+//enable CORS support
+var corsOptions = {
+  origin: /^http:\/\/localhost:.*$/,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 //The API (real work goes here)
 import { routes } from "./routes";
